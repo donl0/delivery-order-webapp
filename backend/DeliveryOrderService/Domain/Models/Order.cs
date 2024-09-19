@@ -16,6 +16,6 @@ namespace Domain.Models
         [Required]
         public uint CargoWeight { get; set; }
         [Required]
-        public string CargoPickupDate { get; set;}
+        public DateTime CargoPickupDate { get; set;}
     }
 }
