@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -22,7 +23,7 @@ namespace Infrastructure.Migrations
                     RecipientCity = table.Column<string>(type: "text", nullable: false),
                     RecipientAddress = table.Column<string>(type: "text", nullable: false),
                     CargoWeight = table.Column<long>(type: "bigint", nullable: false),
-                    CargoPickupDate = table.Column<string>(type: "text", nullable: false)
+                    CargoPickupDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
