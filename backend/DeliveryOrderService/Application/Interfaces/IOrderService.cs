@@ -7,6 +7,6 @@ namespace Application.Interfaces
     {
         public Task<Order> TakeOrderAsync(long id);
         public Task<IEnumerable<Order>> TakeAllOrdersAsync();
-        public Task<long> CreateOrderAsync(OrderRequestDTO order);
+        public Task<long> CreateOrderAsync(OrderRequestDTO order, CancellationToken token);
     }
 }

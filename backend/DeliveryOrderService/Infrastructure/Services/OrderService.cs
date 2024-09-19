@@ -15,7 +15,7 @@ namespace Infrastructure.Services
             _orderContext = orderContext;
         }
 
-        public async Task<long> CreateOrderAsync(OrderRequestDTO order)
+        public async Task<long> CreateOrderAsync(OrderRequestDTO order, CancellationToken token)
         {
             Order createObject = new Order
             {
@@ -28,6 +28,8 @@ namespace Infrastructure.Services
             };
 
             await _orderContext.Orders.AddAsync(createObject);
+
+            await _orderContext.SaveChangesAsync(token);
 
             return createObject.Id;
         }
