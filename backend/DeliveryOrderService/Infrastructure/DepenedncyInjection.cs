@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Infrastructure.Db;
 using Infrastructure.Interfaces;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +19,7 @@ namespace Infrastructure
                 options.UseNpgsql(connectionString);
             });
 
-            services.AddTransient<IOrderService, IOrderService>();
+            services.AddTransient<IOrderService, OrderService>();
 
             return services;
         }
