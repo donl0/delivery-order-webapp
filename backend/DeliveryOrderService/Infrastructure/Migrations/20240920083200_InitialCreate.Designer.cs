@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20240919172456_Init")]
-    partial class Init
+    [Migration("20240920083200_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,17 +27,20 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Models.Order", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CargoPickupDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("CargoWeight")
-                        .HasColumnType("bigint");
+                    b.Property<int>("CargoWeight")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("OrderNumber")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("RecipientAddress")
                         .IsRequired()
