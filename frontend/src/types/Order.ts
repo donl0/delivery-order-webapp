@@ -8,5 +8,5 @@ export interface Order {
     recipient: PersonOrderEntity;
     cargoWeight: number;
     orderNumber: string;
-    cargoPickupDate: string;
+    cargoPickupDate: Date;
 }
