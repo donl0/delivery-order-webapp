@@ -2,6 +2,7 @@ import styles from "./BaseOrderForm.module.css";
 import { FC } from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { Order } from "../../../types/Order";
+import FormInputField from "./FormInputField";
 
 interface BaseOrderFormProps extends Partial<Order> {
   isReadOnly?: boolean;
@@ -23,98 +24,67 @@ const BaseOrderForm: FC<BaseOrderFormProps> = ({
     <div>
       <form>
         {orderNumber && (
-          <div>
-            <label>Order number</label>
-            <input
-              type="text"
-              defaultValue={orderNumber}
-              readOnly={true}
-              className={styles.readOnly}
-            />
-          </div>
+          <FormInputField
+            label="Order number"
+            type="text"
+            defaultValue={orderNumber}
+            isReadOnly={true}
+          />
         )}
 
-        <div>
-          <label>Sender's city</label>
-          <input
-            type="text"
-            defaultValue={sender.city}
-            readOnly={isReadOnly}
-            className={isReadOnly ? styles.readOnly : ""}
-            {...(register ? register("sender.city", { required: "Sender city is required" }) : {})}
-          />
-          {errors?.sender?.city && (
-            <span className={styles.error}>{errors.sender.city.message}</span>
-          )}
-        </div>
+        <FormInputField
+          label="Sender's city"
+          type="text"
+          defaultValue={sender.city}
+          isReadOnly={isReadOnly}
+          register={register ? register("sender.city", { required: "Sender city is required" }) : undefined}
+          errorMessage={errors?.sender?.city?.message}
+        />
 
-        <div>
-          <label>Sender's address</label>
-          <input
-            type="text"
-            defaultValue={sender.address}
-            readOnly={isReadOnly}
-            className={isReadOnly ? styles.readOnly : ""}
-            {...(register ? register("sender.address", { required: "Sender address is required" }) : {})}
-          />
-          {errors?.sender?.address && (
-            <span className={styles.error}>{errors.sender.address.message}</span>
-          )}
-        </div>
+        <FormInputField
+          label="Sender's address"
+          type="text"
+          defaultValue={sender.address}
+          isReadOnly={isReadOnly}
+          register={register ? register("sender.address", { required: "Sender address is required" }) : undefined}
+          errorMessage={errors?.sender?.address?.message}
+        />
 
-        <div>
-          <label>Recipient's city</label>
-          <input
-            type="text"
-            defaultValue={recipient.city}
-            readOnly={isReadOnly}
-            className={isReadOnly ? styles.readOnly : ""}
-            {...(register ? register("recipient.city", { required: "Recipient city is required" }) : {})}
-          />
-          {errors?.recipient?.city && (
-            <span className={styles.error}>{errors.recipient.city.message}</span>
-          )}
-        </div>
+        <FormInputField
+          label="Recipient's city"
+          type="text"
+          defaultValue={recipient.city}
+          isReadOnly={isReadOnly}
+          register={register ? register("recipient.city", { required: "Recipient city is required" }) : undefined}
+          errorMessage={errors?.recipient?.city?.message}
+        />
 
-        <div>
-          <label>Recipient's address</label>
-          <input
-            type="text"
-            defaultValue={recipient.address}
-            readOnly={isReadOnly}
-            className={isReadOnly ? styles.readOnly : ""}
-            {...(register ? register("recipient.address", { required: "Recipient address is required" }) : {})}
-          />
-          {errors?.recipient?.address && (
-            <span className={styles.error}>{errors.recipient.address.message}</span>
-          )}
-        </div>
-        
-        <div>
-          <label>Cargo's weight</label>
-          <input
-            type="number"
-            defaultValue={cargoWeight}
-            readOnly={isReadOnly}
-            className={isReadOnly ? styles.readOnly : ""}
-            {...(register ? register("cargoWeight", { required: "Weight is required", min: { value: 1, message: "Weight must be greater than 0" } }) : {})}
-          />
-          {errors?.cargoWeight && <span className={styles.error}>{errors.cargoWeight.message}</span>}
-        </div>
+        <FormInputField
+          label="Recipient's address"
+          type="text"
+          defaultValue={recipient.address}
+          isReadOnly={isReadOnly}
+          register={register ? register("recipient.address", { required: "Recipient address is required" }) : undefined}
+          errorMessage={errors?.recipient?.address?.message}
+        />
 
-        <div>
-          <label>Cargo pickup date</label>
-          <input
-            type="date"
-            defaultValue={cargoPickupDate.toISOString().split("T")[0]}
-            readOnly={isReadOnly}
-            className={isReadOnly ? styles.readOnly : ""}
-            {...(register ? register("cargoPickupDate", { required: "Cargo pickup date is required" }) : {})}
-          />
-          {errors?.cargoPickupDate && (
-            <span className={styles.error}>{errors.cargoPickupDate.message}</span>
-          )}
-        </div>
+        <FormInputField
+          label="Cargo's weight"
+          type="number"
+          defaultValue={cargoWeight}
+          isReadOnly={isReadOnly}
+          register={register ? register("cargoWeight", { required: "Weight is required", min: { value: 1, message: "Weight must be greater than 0" } }) : undefined}
+          errorMessage={errors?.cargoWeight?.message}
+        />
+
+        <FormInputField
+          label="Cargo pickup date"
+          type="date"
+          defaultValue={cargoPickupDate.toISOString().split("T")[0]}
+          isReadOnly={isReadOnly}
+          register={register ? register("cargoPickupDate", { required: "Cargo pickup date is required" }) : undefined}
+          errorMessage={errors?.cargoPickupDate?.message}
+        />
       </form>
     </div>
   );
