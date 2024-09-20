@@ -1,23 +1,47 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Exceptions;
 
 namespace Domain.Models
 {
-    public class Order
+    public class Order : Entity
     {
-        public long Id { get; set; }
-        [Required]
-        public string SenderCity { get; set; }
-        [Required]
-        public string SenderAddress { get; set; }
-        [Required]
-        public string RecipientCity { get; set; }
-        [Required]
-        public string RecipientAddress { get; set; }
-        [Required]
-        public uint CargoWeight { get; set; }
-        [Required]
-        public Guid OrderNumber { get; set; }
-        [Required]
-        public DateTime CargoPickupDate { get; set;}
+        public string SenderCity { get; private set; }
+        public string SenderAddress { get; private set; }
+        public string RecipientCity { get; private set; }
+        public string RecipientAddress { get; private set; }
+        public int CargoWeight { get; private set; }
+        public Guid OrderNumber { get; private set; }
+        public DateTime CargoPickupDate { get; private set; }
+
+        public Order() { }
+
+        public Order(string senderCity, string senderAddress, string recipientCity, string recipientAddress, int cargoWeight, DateTime cargoPickupDate)
+        {
+            SenderCity = senderCity;
+            SenderAddress = senderAddress;
+            RecipientCity = recipientCity;
+            RecipientAddress = recipientAddress;
+            CargoWeight = cargoWeight;
+            CargoPickupDate = cargoPickupDate;
+
+            Validate();
+        }
+
+        private void Validate()
+        {
+            if (string.IsNullOrWhiteSpace(SenderCity))
+                throw new FieldIsNullOrEmptyException(nameof(SenderCity));
+
+            if (string.IsNullOrWhiteSpace(SenderAddress))
+                throw new FieldIsNullOrEmptyException(nameof(SenderAddress));
+
+            if (string.IsNullOrWhiteSpace(RecipientCity))
+                throw new FieldIsNullOrEmptyException(nameof(RecipientCity));
+
+            if (string.IsNullOrWhiteSpace(RecipientAddress))
+                throw new FieldIsNullOrEmptyException(nameof(RecipientAddress));
+
+            if (CargoWeight <= 0)
+                throw new WeightExceptino(nameof(CargoWeight));
+        }
     }
 }

@@ -17,15 +17,13 @@ namespace Infrastructure.Services
 
         public async Task<long> CreateOrderAsync(OrderRequestDTO order, CancellationToken token)
         {
-            Order createObject = new Order
-            {
-                SenderAddress = order.SenderAddress,
-                SenderCity = order.SenderCity,
-                RecipientAddress = order.RecipientAddress,
-                RecipientCity = order.RecipientCity,
-                CargoPickupDate = order.CargoPickupDate,
-                CargoWeight = order.CargoWeight
-            };
+            Order createObject = new Order(
+                order.SenderCity,
+                order.SenderAddress,
+                order.RecipientCity,
+                order.RecipientAddress,
+                order.CargoWeight,
+                order.CargoPickupDate);
 
             await _orderContext.Orders.AddAsync(createObject);
 

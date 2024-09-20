@@ -13,7 +13,7 @@ namespace Application.DTOs
         [Required]
         public string RecipientAddress { get; set; }
         [Required]
-        public uint CargoWeight { get; set; }
+        public int CargoWeight { get; set; }
         [Required]
         public DateTime CargoPickupDate { get; set; }
     }
