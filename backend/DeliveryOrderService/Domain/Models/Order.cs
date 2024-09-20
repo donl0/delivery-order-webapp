@@ -23,6 +23,8 @@ namespace Domain.Models
             CargoWeight = cargoWeight;
             CargoPickupDate = cargoPickupDate;
 
+            SerUniqueOrderNumber();
+
             Validate();
         }
 
@@ -42,6 +44,10 @@ namespace Domain.Models
 
             if (CargoWeight <= 0)
                 throw new WeightExceptino(nameof(CargoWeight));
+        }
+
+        private void SerUniqueOrderNumber() {
+            OrderNumber = Guid.NewGuid();
         }
     }
 }
