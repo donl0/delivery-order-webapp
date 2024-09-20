@@ -16,6 +16,8 @@ namespace Domain.Models
         [Required]
         public uint CargoWeight { get; set; }
         [Required]
+        public Guid OrderNumber { get; set; }
+        [Required]
         public DateTime CargoPickupDate { get; set;}
     }
 }
