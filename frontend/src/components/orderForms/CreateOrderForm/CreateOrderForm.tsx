@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import BaseOrderForm from "../BaseOrderForm/BaseOrderForm";
-import OrderViewForm from "../../../types/OrderViewForm";
+import { Order } from "../../../types/Order";
 
 const CreateOrderForm: FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<OrderViewForm>();
+  const { register, handleSubmit, formState: { errors } } = useForm<Order>();
 
-  const onSubmit = (data: OrderViewForm) => {
+  const onSubmit = (data: Order) => {
     console.log(data);
   };
 

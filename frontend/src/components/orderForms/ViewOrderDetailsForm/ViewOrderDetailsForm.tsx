@@ -1,8 +1,8 @@
 import { FC } from "react";
 import BaseOrderForm from "../BaseOrderForm/BaseOrderForm";
-import OrderViewForm from "../../../types/OrderViewForm";
+import { Order } from "../../../types/Order";
 
-const ViewOrderDetailsForm : FC <OrderViewForm> = (props) => {
+const ViewOrderDetailsForm : FC <Order> = (props) => {
     return (
         <BaseOrderForm {...props} isReadOnly={true}></BaseOrderForm>
     )

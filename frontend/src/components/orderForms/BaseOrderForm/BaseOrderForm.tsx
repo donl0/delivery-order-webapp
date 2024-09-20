@@ -1,20 +1,20 @@
 import styles from "./BaseOrderForm.module.css";
 import { FC } from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import OrderViewForm from "../../../types/OrderViewForm";
+import { Order } from "../../../types/Order";
 
-interface BaseOrderFormProps extends Partial<OrderViewForm> {
+interface BaseOrderFormProps extends Partial<Order> {
   isReadOnly?: boolean;
-  register?: UseFormRegister<OrderViewForm>;
-  errors?: FieldErrors<OrderViewForm>;
+  register?: UseFormRegister<Order>;
+  errors?: FieldErrors<Order>;
 }
 
 const BaseOrderForm: FC<BaseOrderFormProps> = ({
-  senderCity = "",
-  recipientCity = "",
+  sender = { city: "", address: "" },
+  recipient = { city: "", address: "" },
   cargoWeight = 1,
   cargoPickupDate = new Date(),
-  number = "",
+  orderNumber = "",
   isReadOnly = false,
   register,
   errors,
@@ -22,41 +22,46 @@ const BaseOrderForm: FC<BaseOrderFormProps> = ({
   return (
     <div>
       <form>
-      {number && (
+        {orderNumber && (
           <div>
             <label>Order number</label>
             <input
               type="text"
-              defaultValue={number}
+              defaultValue={orderNumber}
               readOnly={true}
               className={styles.readOnly}
             />
           </div>
         )}
+
         <div>
           <label>Sender's city</label>
           <input
             type="text"
-            defaultValue={senderCity}
+            defaultValue={sender.city}
             readOnly={isReadOnly}
             className={isReadOnly ? styles.readOnly : ""}
-            {...(register ? register("senderCity", { required: "Sender city is required" }) : {})}
+            {...(register ? register("sender.city", { required: "Sender city is required" }) : {})}
           />
-          {errors?.senderCity && <span className={styles.error}>{errors.senderCity.message}</span>}
+          {errors?.sender?.city && (
+            <span className={styles.error}>{errors.sender.city.message}</span>
+          )}
         </div>
+
         <div>
           <label>Recipient's city</label>
           <input
             type="text"
-            defaultValue={recipientCity}
+            defaultValue={recipient.city}
             readOnly={isReadOnly}
             className={isReadOnly ? styles.readOnly : ""}
-            {...(register ? register("recipientCity", { required: "Recipient city is required" }) : {})}
+            {...(register ? register("recipient.city", { required: "Recipient city is required" }) : {})}
           />
-          {errors?.recipientCity && (
-            <span className={styles.error}>{errors.recipientCity.message}</span>
+          {errors?.recipient?.city && (
+            <span className={styles.error}>{errors.recipient.city.message}</span>
           )}
         </div>
+
         <div>
           <label>Cargo's weight</label>
           <input
@@ -68,6 +73,7 @@ const BaseOrderForm: FC<BaseOrderFormProps> = ({
           />
           {errors?.cargoWeight && <span className={styles.error}>{errors.cargoWeight.message}</span>}
         </div>
+
         <div>
           <label>Cargo pickup date</label>
           <input
