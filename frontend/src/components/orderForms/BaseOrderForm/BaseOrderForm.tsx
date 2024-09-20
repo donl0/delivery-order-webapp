@@ -49,6 +49,20 @@ const BaseOrderForm: FC<BaseOrderFormProps> = ({
         </div>
 
         <div>
+          <label>Sender's address</label>
+          <input
+            type="text"
+            defaultValue={sender.address}
+            readOnly={isReadOnly}
+            className={isReadOnly ? styles.readOnly : ""}
+            {...(register ? register("sender.address", { required: "Sender address is required" }) : {})}
+          />
+          {errors?.sender?.address && (
+            <span className={styles.error}>{errors.sender.address.message}</span>
+          )}
+        </div>
+
+        <div>
           <label>Recipient's city</label>
           <input
             type="text"
@@ -62,6 +76,20 @@ const BaseOrderForm: FC<BaseOrderFormProps> = ({
           )}
         </div>
 
+        <div>
+          <label>Recipient's address</label>
+          <input
+            type="text"
+            defaultValue={recipient.address}
+            readOnly={isReadOnly}
+            className={isReadOnly ? styles.readOnly : ""}
+            {...(register ? register("recipient.address", { required: "Recipient address is required" }) : {})}
+          />
+          {errors?.recipient?.address && (
+            <span className={styles.error}>{errors.recipient.address.message}</span>
+          )}
+        </div>
+        
         <div>
           <label>Cargo's weight</label>
           <input
