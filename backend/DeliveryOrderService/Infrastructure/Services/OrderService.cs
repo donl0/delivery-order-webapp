@@ -1,6 +1,7 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
 using Domain.Models;
+using Infrastructure.Exceptions;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,11 @@ namespace Infrastructure.Services
 
             await _orderContext.Orders.AddAsync(createObject);
 
+            if (await IsOrderNumberUnique(createObject.OrderNumber) == false)
+            {
+                throw new NotUniqueNumberException(createObject.OrderNumber);
+            }
+
             await _orderContext.SaveChangesAsync(token);
 
             return createObject.Id;
@@ -49,6 +55,17 @@ namespace Infrastructure.Services
             }
 
             return order;
+        }
+
+        private async Task<bool> IsOrderNumberUnique(Guid number) {
+            Order orders = await _orderContext.Orders.FirstOrDefaultAsync(o => o.OrderNumber == number);
+
+            if (orders == null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
