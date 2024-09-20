@@ -14,6 +14,7 @@ const BaseOrderForm: FC<BaseOrderFormProps> = ({
   recipientCity = "",
   cargoWeight = 1,
   cargoPickupDate = new Date(),
+  number = "",
   isReadOnly = false,
   register,
   errors,
@@ -21,6 +22,17 @@ const BaseOrderForm: FC<BaseOrderFormProps> = ({
   return (
     <div>
       <form>
+      {number && (
+          <div>
+            <label>Order number</label>
+            <input
+              type="text"
+              defaultValue={number}
+              readOnly={true}
+              className={styles.readOnly}
+            />
+          </div>
+        )}
         <div>
           <label>Sender's city</label>
           <input

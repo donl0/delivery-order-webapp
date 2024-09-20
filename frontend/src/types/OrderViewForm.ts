@@ -3,4 +3,5 @@ export default interface OrderViewForm {
     recipientCity: string;
     cargoWeight: number;
     cargoPickupDate: Date;
+    number: string;
 }
