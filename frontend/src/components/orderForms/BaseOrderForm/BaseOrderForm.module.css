@@ -1,0 +1,9 @@
+.inputField {
+    margin-bottom: 10px;
+}
+
+.readOnly {
+    background-color: #f0f0f0;
+    color: #777;
+    cursor: not-allowed;
+}
