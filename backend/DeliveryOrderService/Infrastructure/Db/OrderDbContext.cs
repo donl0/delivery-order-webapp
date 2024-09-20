@@ -14,6 +14,21 @@ namespace Infrastructure.Db
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Order>(order =>
+            {
+                order.OwnsOne(o => o.Sender, sender =>
+                {
+                    sender.Property(s => s.City).HasColumnName("SenderCity").IsRequired();
+                    sender.Property(s => s.Address).HasColumnName("SenderAddress").IsRequired();
+                });
+
+                order.OwnsOne(o => o.Recipient, recipient =>
+                {
+                    recipient.Property(r => r.City).HasColumnName("RecipientCity").IsRequired();
+                    recipient.Property(r => r.Address).HasColumnName("RecipientAddress").IsRequired();
+                });
+            });
+
             base.OnModelCreating(modelBuilder);
         }
     }
