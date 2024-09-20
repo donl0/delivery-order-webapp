@@ -4,10 +4,8 @@ namespace Domain.Models
 {
     public class Order : Entity
     {
-        public string SenderCity { get; private set; }
-        public string SenderAddress { get; private set; }
-        public string RecipientCity { get; private set; }
-        public string RecipientAddress { get; private set; }
+        public PersonOrderEntity Sender { get; private set; }
+        public PersonOrderEntity Recipient { get; private set; }
         public int CargoWeight { get; private set; }
         public Guid OrderNumber { get; private set; }
         public DateTime CargoPickupDate { get; private set; }
@@ -16,37 +14,28 @@ namespace Domain.Models
 
         public Order(string senderCity, string senderAddress, string recipientCity, string recipientAddress, int cargoWeight, DateTime cargoPickupDate)
         {
-            SenderCity = senderCity;
-            SenderAddress = senderAddress;
-            RecipientCity = recipientCity;
-            RecipientAddress = recipientAddress;
             CargoWeight = cargoWeight;
             CargoPickupDate = cargoPickupDate;
+            Sender = new PersonOrderEntity(senderCity, senderAddress);
+            Recipient = new PersonOrderEntity(recipientCity, recipientAddress);
 
-            SerUniqueOrderNumber();
-
+            SetUniqueOrderNumber();
             Validate();
         }
 
         private void Validate()
         {
-            if (string.IsNullOrWhiteSpace(SenderCity))
-                throw new FieldIsNullOrEmptyException(nameof(SenderCity));
+            if (Sender == null)
+                throw new FieldIsNullOrEmptyException(nameof(Sender));
 
-            if (string.IsNullOrWhiteSpace(SenderAddress))
-                throw new FieldIsNullOrEmptyException(nameof(SenderAddress));
-
-            if (string.IsNullOrWhiteSpace(RecipientCity))
-                throw new FieldIsNullOrEmptyException(nameof(RecipientCity));
-
-            if (string.IsNullOrWhiteSpace(RecipientAddress))
-                throw new FieldIsNullOrEmptyException(nameof(RecipientAddress));
+            if (Recipient == null)
+                throw new FieldIsNullOrEmptyException(nameof(Recipient));
 
             if (CargoWeight <= 0)
                 throw new WeightExceptino(nameof(CargoWeight));
         }
 
-        private void SerUniqueOrderNumber() {
+        private void SetUniqueOrderNumber() {
             OrderNumber = Guid.NewGuid();
         }
     }
