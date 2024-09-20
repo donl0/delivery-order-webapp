@@ -13,7 +13,7 @@ export const getOrders = async (): Promise<Order[]> => {
             },
             cargoWeight: 10,
             orderNumber: "asdasd32-2323",
-            cargoPickupDate: "20.09.2024"
+            cargoPickupDate: new Date()
         },
         {
             sender: {
@@ -26,7 +26,7 @@ export const getOrders = async (): Promise<Order[]> => {
             },
             cargoWeight: 10,
             orderNumber: "asdasd32-2323",
-            cargoPickupDate: "20.09.2024"
+            cargoPickupDate: new Date()
         },
         {
             sender: {
@@ -39,7 +39,7 @@ export const getOrders = async (): Promise<Order[]> => {
             },
             cargoWeight: 10,
             orderNumber: "asdasd32-2323qweqwe",
-            cargoPickupDate: "20.09.2024"
+            cargoPickupDate: new Date()
         }]
 
     //   const response = await fetch('/api/orders');
