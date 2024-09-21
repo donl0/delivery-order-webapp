@@ -4,6 +4,7 @@ export interface PersonOrderEntity {
 }
 
 export interface Order {
+    id: number;
     sender: PersonOrderEntity;
     recipient: PersonOrderEntity;
     cargoWeight: number;
