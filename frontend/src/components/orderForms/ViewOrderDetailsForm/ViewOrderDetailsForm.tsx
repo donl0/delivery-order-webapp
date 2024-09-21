@@ -1,41 +1,11 @@
-import { FC, useContext, useEffect, useState } from "react";
-import BaseOrderForm from "../BaseOrderForm/BaseOrderForm";
-import { Order } from "../../../types/Order";
-import { getOrder } from "../../../api/ordersApi";
-import { CurrentOrderContext } from "../../OrderContext/CurrentOrderProvider";
+import { FC } from "react";
+import BaseOrderForm from "../abstracts/BaseOrderForm/BaseOrderForm";
+import withCurrentOrder from "../abstracts/withCurrentOrder";
 
+const ViewOrderDetailsForm: FC = () => {
+  const OrderFormWithCurrentOrder = withCurrentOrder(BaseOrderForm);
 
-const ViewOrderDetailsForm : FC  = () => {
-    const { orderId, setOrderId } = useContext(CurrentOrderContext);
-
-    const [order, setOrder] = useState<Order>();
-    const [loading, setLoading] = useState<boolean>(true);
-    
-    useEffect(() => {
-        const loadOrders = async () => {
-            try {
-                const order: Order = await getOrder(orderId);
-
-                setOrder(order);
-            }
-            catch {
-                setLoading(true);
-            }
-            finally {
-                setLoading(false);
-            }
-        }
-
-        loadOrders();
-    }, [orderId])
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    return (
-        <BaseOrderForm {...order} isReadOnly={true}></BaseOrderForm>
-    )
-}
+  return <OrderFormWithCurrentOrder isReadOnly={true} />;
+};
 
 export default ViewOrderDetailsForm;

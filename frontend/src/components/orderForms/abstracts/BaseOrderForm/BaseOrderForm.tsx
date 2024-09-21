@@ -1,10 +1,10 @@
 import styles from "./BaseOrderForm.module.css";
 import { FC } from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { Order } from "../../../types/Order";
+import { Order } from "../../../../types/Order";
 import FormInputField from "./FormInputField";
 
-interface BaseOrderFormProps extends Partial<Order> {
+export interface BaseOrderFormProps extends Partial<Order> {
   isReadOnly?: boolean;
   register?: UseFormRegister<Order>;
   errors?: FieldErrors<Order>;

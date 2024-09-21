@@ -1,21 +1,15 @@
-import { FC } from "react";
-import { useForm } from "react-hook-form";
-import BaseOrderForm from "../BaseOrderForm/BaseOrderForm";
 import { Order } from "../../../types/Order";
+import BaseOrderForm from "../abstracts/BaseOrderForm/BaseOrderForm";
+import withFormValidation from "../abstracts/withFormValidation";
 
-const CreateOrderForm: FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<Order>();
-
+const CreateOrderForm = () => {
   const onSubmit = (data: Order) => {
-    console.log(data);
+    console.log("Order created", data);
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <BaseOrderForm register={register} errors={errors} />
-      <button type="submit">Create</button>
-    </form>
-  );
-}
+  const OrderFormWithValidation = withFormValidation(BaseOrderForm);
+
+  return <OrderFormWithValidation onSubmit={onSubmit} />;
+};
 
 export default CreateOrderForm;
