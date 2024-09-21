@@ -1,10 +1,13 @@
+export interface OrderId {
+    id: number;
+}
+
 export interface PersonOrderEntity {
     city: string;
     address: string;
 }
 
-export interface Order {
-    id: number;
+export interface Order extends OrderId {
     sender: PersonOrderEntity;
     recipient: PersonOrderEntity;
     cargoWeight: number;
