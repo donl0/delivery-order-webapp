@@ -1,7 +1,9 @@
 import { FC } from 'react';
 import { Order } from '../../types/Order';
 import { ISetCurrentId } from '../OrderContext/CurrentOrderProvider';
-import SeeDetailOrderButton from '../orderFormOpenerButtons/SeeDetailOrderButton/SeeDetailOrderButton';
+import SeeDetailOrderButton from '../MenuOrderActionButtons/SeeDetailOrderFormOpenerButton';
+import EditOrderFormOpenerButton from '../MenuOrderActionButtons/EditOrderFormOpenerButton';
+import DeleteOrderButton from '../MenuOrderActionButtons/DeleteOrderButtons';
 
 interface OrdersTableProps extends ISetCurrentId {
     orders: Order[],
@@ -27,7 +29,10 @@ const OrdersTable: FC<OrdersTableProps> = ({ orders, setOrderId }) => {
               <td>{order.recipient.city}</td>
               <td>{order.cargoWeight}</td>
               <td>{order.cargoPickupDate.toLocaleDateString()}</td>
-              <td><SeeDetailOrderButton setCurrentOrder={()=>{setOrderId(order.id)}}></SeeDetailOrderButton></td>
+              <td><SeeDetailOrderButton id={order.id}/>
+                  <EditOrderFormOpenerButton id={order.id}/>
+                  <DeleteOrderButton id={order.id}/>
+              </td>
             </tr>
           ))}
         </tbody>
