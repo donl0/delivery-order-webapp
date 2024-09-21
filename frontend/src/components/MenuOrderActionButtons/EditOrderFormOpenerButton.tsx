@@ -7,7 +7,7 @@ const EditOrderFormOpenerButton: FC<OrderId> = ({ id }) => {
   const navigateToUrl = useNavigateToUrl();
 
   const handleClick = () => {
-    navigateToUrl(`/edit-order${id}`);
+    navigateToUrl(`/edit-order/${id}`);
   };
 
   return (
