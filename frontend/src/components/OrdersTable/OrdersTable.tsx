@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import { Order } from '../../types/Order';
+import { ISetCurrentId } from '../OrderContext/CurrentOrderProvider';
+import SeeDetailOrderButton from '../orderFormOpenerButtons/SeeDetailOrderButton/SeeDetailOrderButton';
 
-interface OrdersTableProps {
-    orders: Order[]
+interface OrdersTableProps extends ISetCurrentId {
+    orders: Order[],
 }
 
-const OrdersTable: FC<OrdersTableProps> = ({ orders }) => {
+const OrdersTable: FC<OrdersTableProps> = ({ orders, setOrderId }) => {
     return (
       <table>
         <thead>
@@ -25,8 +27,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ orders }) => {
               <td>{order.recipient.city}</td>
               <td>{order.cargoWeight}</td>
               <td>{order.cargoPickupDate.toLocaleDateString()}</td>
-              <td><button>Details</button></td>
-              <td></td>
+              <td><SeeDetailOrderButton setCurrentOrder={()=>{setOrderId(order.id)}}></SeeDetailOrderButton></td>
             </tr>
           ))}
         </tbody>
