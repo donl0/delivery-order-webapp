@@ -4,6 +4,7 @@ import { Order } from "../../types/Order"
 import { getOrders } from "../../api/ordersApi";
 import { useNavigate } from "react-router-dom";
 import { CurrentOrderContext } from "../OrderContext/CurrentOrderProvider";
+import CreateOrderFormOpenerButton from "../MenuOrderActionButtons/CreateOrderFormOpenerButton";
 
 const Orders: FC = () => {
     const { orderId, setOrderId } = useContext(CurrentOrderContext);
@@ -38,7 +39,7 @@ const Orders: FC = () => {
     return (
         <div>
             <OrdersTable orders={orders} setOrderId={setOrderId}></OrdersTable>
-            <button onClick={() => navigate("/create-order")}>Create Order</button>
+            <CreateOrderFormOpenerButton/>
         </div>
     )
 }
