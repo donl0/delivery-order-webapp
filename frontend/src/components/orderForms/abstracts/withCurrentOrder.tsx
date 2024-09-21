@@ -1,19 +1,19 @@
 import { FC, useEffect, useState, useContext } from "react";
 import { getOrder } from "../../../api/ordersApi";
 import { Order } from "../../../types/Order";
-import { CurrentOrderContext } from "../../OrderContext/CurrentOrderProvider";
 import { BaseOrderFormProps } from "./BaseOrderForm/BaseOrderForm";
+import { useParams } from "react-router-dom";
 
 const withCurrentOrder = (Component: FC<BaseOrderFormProps & { loading: boolean }>) => {
   return (props: Partial<BaseOrderFormProps>) => {
-    const { orderId } = useContext(CurrentOrderContext);
+    const { orderId } = useParams<{ orderId: string }>();
     const [order, setOrder] = useState<Order | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
       const loadOrder = async () => {
         try {
-          const fetchedOrder = await getOrder(orderId);
+          const fetchedOrder = await getOrder(Number(orderId));
           setOrder(fetchedOrder);
         } finally {
           setLoading(false);
