@@ -1,14 +1,12 @@
-import { FC } from 'react';
-import { Order } from '../../types/Order';
-import SeeDetailOrderButton from '../MenuOrderActionButtons/SeeDetailOrderFormOpenerButton';
-import EditOrderFormOpenerButton from '../MenuOrderActionButtons/EditOrderFormOpenerButton';
-import DeleteOrderButton from '../MenuOrderActionButtons/DeleteOrderButtons';
+import { FC, ReactElement } from 'react';
+import { Order, OrderId } from '../../types/Order';
 
 interface OrdersTableProps {
-    orders: Order[],
+  orders: Order[],
+  renderActionButtons: (id: number) => ReactElement<OrderId>[];
 }
 
-const OrdersTable: FC<OrdersTableProps> = ({ orders}) => {
+const OrdersTable: FC<OrdersTableProps> = ({ orders, renderActionButtons }) => {
     return (
       <table>
         <thead>
@@ -28,9 +26,8 @@ const OrdersTable: FC<OrdersTableProps> = ({ orders}) => {
               <td>{order.recipient.city}</td>
               <td>{order.cargoWeight}</td>
               <td>{order.cargoPickupDate.toLocaleDateString()}</td>
-              <td><SeeDetailOrderButton id={order.id}/>
-                  <EditOrderFormOpenerButton id={order.id}/>
-                  <DeleteOrderButton id={order.id}/>
+              <td>
+                {renderActionButtons(order.id)}
               </td>
             </tr>
           ))}
