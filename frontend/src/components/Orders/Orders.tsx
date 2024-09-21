@@ -3,12 +3,9 @@ import OrdersTable from "../OrdersTable/OrdersTable"
 import { Order } from "../../types/Order"
 import { getOrders } from "../../api/ordersApi";
 import { useNavigate } from "react-router-dom";
-import { CurrentOrderContext } from "../OrderContext/CurrentOrderProvider";
 import CreateOrderFormOpenerButton from "../MenuOrderActionButtons/CreateOrderFormOpenerButton";
 
 const Orders: FC = () => {
-    const { orderId, setOrderId } = useContext(CurrentOrderContext);
-
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -38,7 +35,7 @@ const Orders: FC = () => {
 
     return (
         <div>
-            <OrdersTable orders={orders} setOrderId={setOrderId}></OrdersTable>
+            <OrdersTable orders={orders}></OrdersTable>
             <CreateOrderFormOpenerButton/>
         </div>
     )

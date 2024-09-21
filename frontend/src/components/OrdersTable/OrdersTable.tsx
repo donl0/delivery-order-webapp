@@ -1,15 +1,14 @@
 import { FC } from 'react';
 import { Order } from '../../types/Order';
-import { ISetCurrentId } from '../OrderContext/CurrentOrderProvider';
 import SeeDetailOrderButton from '../MenuOrderActionButtons/SeeDetailOrderFormOpenerButton';
 import EditOrderFormOpenerButton from '../MenuOrderActionButtons/EditOrderFormOpenerButton';
 import DeleteOrderButton from '../MenuOrderActionButtons/DeleteOrderButtons';
 
-interface OrdersTableProps extends ISetCurrentId {
+interface OrdersTableProps {
     orders: Order[],
 }
 
-const OrdersTable: FC<OrdersTableProps> = ({ orders, setOrderId }) => {
+const OrdersTable: FC<OrdersTableProps> = ({ orders}) => {
     return (
       <table>
         <thead>
