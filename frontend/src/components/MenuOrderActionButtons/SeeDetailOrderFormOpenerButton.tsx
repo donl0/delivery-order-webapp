@@ -7,7 +7,7 @@ const SeeDetailOrderFormOpenerButton: FC<OrderId> = ({ id }) => {
   const navigateToUrl = useNavigateToUrl();
 
   const handleClick = () => {
-    navigateToUrl(`/see-order-detail`);
+    navigateToUrl(`/see-order-detail/${id}`);
   };
 
   return (

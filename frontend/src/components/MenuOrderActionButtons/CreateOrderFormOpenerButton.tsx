@@ -9,7 +9,7 @@ const CreateOrderFormOpenerButton: FC<CreateOrderFormOpenerButtonProps> = () => 
   const navigateToUrl = useNavigateToUrl();
 
   const handleClick = () => {
-    navigateToUrl(`/create-order`);
+    navigateToUrl(`/create-order/`);
   };
 
   return (
