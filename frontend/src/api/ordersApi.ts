@@ -1,21 +1,15 @@
 import { Order } from '../types/Order';
 
 export const getOrder = async (id: number): Promise<Order> => {
-    let order: Order = {
-        id: 1,
-        sender: {
-            city: "Saint-Petersburg",
-            address: "Nevsky",
-        },
-        recipient: {
-            city: "Saint-Petersburg",
-            address: "Nevsky",
-        },
-        cargoWeight: 10,
-        orderNumber: "asdasd32-23233",
-        cargoPickupDate: new Date()
-    };
+    const response = await fetch(`https://localhost:7292/api/Orders/${id}`);
 
+    if (!response.ok) {
+        throw new Error('Loading error');
+    }
+
+    const order: Order = await response.json();
+    order.cargoPickupDate = new Date(order.cargoPickupDate)
+    
     return order;
 }
 
