@@ -14,7 +14,7 @@ const Orders: FC = () => {
     const renderButtons = (id: number) => [
         <SeeDetailOrderFormOpenerButton key={`see-${id}`} id={id} />,
         <EditOrderFormOpenerButton key={`edit-${id}`} id={id} />,
-        <DeleteOrderButton key={`delete-${id}`} id={id} onSuccess={loadOrders} />,
+        <DeleteOrderButton key={`delete-${id}`} id={id} onSuccess={() => loadOrders()} />
     ];
 
     const loadOrders = async () => {
