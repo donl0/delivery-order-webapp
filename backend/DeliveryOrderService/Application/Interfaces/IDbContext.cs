@@ -1,7 +1,7 @@
 ﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Interfaces
+namespace Application.Interfaces
 {
     public interface IDbContext
     {
