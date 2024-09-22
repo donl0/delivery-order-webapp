@@ -14,35 +14,23 @@ const Orders: FC = () => {
     const renderButtons = (id: number) => [
         <SeeDetailOrderFormOpenerButton key={`see-${id}`} id={id} />,
         <EditOrderFormOpenerButton key={`edit-${id}`} id={id} />,
-        <DeleteOrderButton key={`delete-${id}`} id={id} />,
-      ];
+        <DeleteOrderButton key={`delete-${id}`} id={id} onSuccess={loadOrders} />,
+    ];
+
+    const loadOrders = async () => {
+        const orders: Order[] = await getOrders();
+        setOrders(orders);
+    };
 
     useEffect(() => {
-        const loadOrders = async () => {
-            try {
-                const orders: Order[] = await getOrders();
-
-                setOrders(orders);
-            }
-            catch {
-                setLoading(true);
-            }
-            finally {
-                setLoading(false);
-            }
-        }
-
         loadOrders();
-    })
+    }, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-    
+
     return (
         <div>
             <OrdersTable orders={orders} renderActionButtons={renderButtons}></OrdersTable>
-            <CreateOrderFormOpenerButton/>
+            <CreateOrderFormOpenerButton />
         </div>
     )
 }

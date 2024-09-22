@@ -3,10 +3,16 @@ import { OrderId } from "../../types/Order";
 import BaseOrderButton from "../UI/orderActoinButton/BaseOrderButton";
 import { FC } from "react";
 
-const DeleteOrderButton: FC<OrderId> = ({ id }) => {
+interface DeleteOrderButtonProps {
+  id: number,
+  onSuccess: Function
+}
+
+const DeleteOrderButton: FC<DeleteOrderButtonProps> = ({ id, onSuccess }) => {
   const handleClick = () => {
     const update = async (orderId: number) => {
       await deleteOrder(orderId);
+      onSuccess();
     }
 
     update(id);
