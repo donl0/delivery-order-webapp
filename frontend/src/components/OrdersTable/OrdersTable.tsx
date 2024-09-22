@@ -12,18 +12,28 @@ const OrdersTable: FC<OrdersTableProps> = ({ orders, renderActionButtons }) => {
         <thead>
           <tr>
             <th>Order Number</th>
+
             <th>Sender City</th>
+            <th>Sender Adress</th>
+
             <th>Recipient City</th>
+            <th>Recipient Adress</th>
+
             <th>Cargo Weight</th>
             <th>Cargo Pickup Date</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order.orderNumber}>
+            <tr key={order.id}>
               <td>{order.orderNumber}</td>
+
               <td>{order.sender.city}</td>
+              <td>{order.sender.address}</td>
+
               <td>{order.recipient.city}</td>
+              <td>{order.recipient.address}</td>
+
               <td>{order.cargoWeight}</td>
               <td>{order.cargoPickupDate.toLocaleDateString()}</td>
               <td>
