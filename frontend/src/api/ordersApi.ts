@@ -1,5 +1,38 @@
 import { Order } from '../types/Order';
 
+export const createOrder = async (order: Order): Promise<number> => {
+    const url = 'https://localhost:7292/api/Orders';
+
+    const cargoPickupDate = typeof order.cargoPickupDate === 'string'
+    ? new Date(order.cargoPickupDate)
+    : order.cargoPickupDate;
+
+    const orderCreateDto = {
+        senderCity: order.sender.city,
+        senderAddress: order.sender.address,
+        recipientCity: order.recipient.city,
+        recipientAddress: order.recipient.address,
+        cargoWeight: order.cargoWeight,
+        cargoPickupDate: cargoPickupDate.toISOString(),
+    };
+
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'accept': 'text/plain',
+        },
+        body: JSON.stringify(orderCreateDto),
+    });
+
+    if (!response.ok) {
+        throw new Error('Error creating order');
+    }
+
+    const createdOrderId: number = await response.json();
+    return createdOrderId;
+};
+
 export const updateOrder = async (order: Order): Promise<void> => {
     const url = 'https://localhost:7292/api/Orders';
 
