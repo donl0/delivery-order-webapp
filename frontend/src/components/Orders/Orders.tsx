@@ -18,8 +18,9 @@ const Orders: FC = () => {
     ];
 
     const loadOrders = async () => {
-        const orders: Order[] = await getOrders();
-        setOrders(orders);
+        const newOrders: Order[] = await getOrders();
+        
+        setOrders(newOrders);
     };
 
     useEffect(() => {

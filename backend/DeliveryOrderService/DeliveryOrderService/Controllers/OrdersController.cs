@@ -21,7 +21,6 @@ namespace DeliveryOrderService.Controllers
             _mediator = mediator;
         }
 
-
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrderAsync(long id)
         {
