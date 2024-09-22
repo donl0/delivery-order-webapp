@@ -3,15 +3,16 @@ import Orders from "./components/Orders/Orders";
 import CreateOrderForm from "./components/orderForms/CreateOrderForm/CreateOrderForm";
 import ViewOrderDetailsForm from './components/orderForms/ViewOrderDetailsForm/ViewOrderDetailsForm';
 import EditOrderForm from './components/orderForms/EditOrderForm/EditOrderForm';
+import { Urls } from './types/Urls';
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Orders></Orders>}></Route>
-        <Route path="/create-order" element={<CreateOrderForm></CreateOrderForm>}></Route>
-        <Route path="/see-order-detail/:orderId" element={<ViewOrderDetailsForm />} />
-        <Route path="/edit-order/:orderId" element={<EditOrderForm />} />
+        <Route path={Urls.HomePage} element={<Orders></Orders>}></Route>
+        <Route path={Urls.CreateOrder} element={<CreateOrderForm></CreateOrderForm>}></Route>
+        <Route path={`${Urls.SeeDetail}/:orderId`} element={<ViewOrderDetailsForm />} />
+        <Route path={`${Urls.EditOrder}/:orderId`} element={<EditOrderForm />} />
         </Routes>
     </Router>
   )

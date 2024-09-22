@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useNavigateToUrl} from "../../utils/orderUtils";
 import BaseOrderButton from "../UI/orderActoinButton/BaseOrderButton";
+import { Urls } from "../../types/Urls";
 
 interface CreateOrderFormOpenerButtonProps {
 }
@@ -9,7 +10,8 @@ const CreateOrderFormOpenerButton: FC<CreateOrderFormOpenerButtonProps> = () => 
   const navigateToUrl = useNavigateToUrl();
 
   const handleClick = () => {
-    navigateToUrl(`/create-order/`);
+    
+    navigateToUrl(Urls.CreateOrder);
   };
 
   return (
