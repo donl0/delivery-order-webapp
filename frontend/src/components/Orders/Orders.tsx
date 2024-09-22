@@ -6,10 +6,10 @@ import CreateOrderFormOpenerButton from "../MenuOrderActionButtons/CreateOrderFo
 import SeeDetailOrderFormOpenerButton from "../MenuOrderActionButtons/SeeDetailOrderFormOpenerButton";
 import EditOrderFormOpenerButton from "../MenuOrderActionButtons/EditOrderFormOpenerButton";
 import DeleteOrderButton from "../MenuOrderActionButtons/DeleteOrderButtons";
+import styles from "./Orders.module.css"
 
 const Orders: FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
 
     const renderButtons = (id: number) => [
         <SeeDetailOrderFormOpenerButton key={`see-${id}`} id={id} />,
@@ -26,9 +26,8 @@ const Orders: FC = () => {
         loadOrders();
     }, []);
 
-
     return (
-        <div>
+        <div className={styles.main_container}>
             <OrdersTable orders={orders} renderActionButtons={renderButtons}></OrdersTable>
             <CreateOrderFormOpenerButton />
         </div>
