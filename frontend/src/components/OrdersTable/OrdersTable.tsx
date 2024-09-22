@@ -1,5 +1,6 @@
 import { FC, ReactElement } from 'react';
 import { Order, OrderId } from '../../types/Order';
+import styles from "./OrdersTable.module.css"
 
 interface OrdersTableProps {
   orders: Order[],
@@ -10,7 +11,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ orders, renderActionButtons }) => {
     return (
       <table>
         <thead>
-          <tr>
+          <tr className={`${styles.th__mainLine}`}>
             <th>Order Number</th>
 
             <th>Sender City</th>
@@ -21,6 +22,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ orders, renderActionButtons }) => {
 
             <th>Cargo Weight</th>
             <th>Cargo Pickup Date</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
