@@ -3,6 +3,7 @@ import { FC } from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { Order } from "../../../../types/Order";
 import FormInputField from "./FormInputField";
+import GoMainMenuButton from "../../../UI/GoMainMenuButton/GoMainMenuButton";
 
 export interface BaseOrderFormProps extends Partial<Order> {
   isReadOnly?: boolean;
@@ -84,6 +85,8 @@ const BaseOrderForm: FC<BaseOrderFormProps> = ({
         register={register ? register("cargoPickupDate", { required: "Cargo pickup date is required" }) : undefined}
         errorMessage={errors?.cargoPickupDate?.message}
       />
+
+      <GoMainMenuButton></GoMainMenuButton>
     </div>
   );
 };
