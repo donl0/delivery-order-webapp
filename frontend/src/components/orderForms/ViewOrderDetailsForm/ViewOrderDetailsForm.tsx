@@ -5,7 +5,9 @@ import withCurrentOrder from "../abstracts/withCurrentOrder";
 const ViewOrderDetailsForm: FC = () => {
   const OrderFormWithCurrentOrder = withCurrentOrder(BaseOrderForm);
 
-  return <OrderFormWithCurrentOrder isReadOnly={true} />;
+  return <form>
+    <OrderFormWithCurrentOrder isReadOnly={true} />
+  </form> ;
 };
 
 export default ViewOrderDetailsForm;
