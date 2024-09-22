@@ -5,5 +5,3 @@ export const enum Urls{
     EditOrder = "/edit-order"
 
 }
-
-console.log(Urls.HomePage);
