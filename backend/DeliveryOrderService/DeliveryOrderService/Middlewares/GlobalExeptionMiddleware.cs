@@ -1,4 +1,5 @@
-﻿using Domain.Exceptions;
+﻿using Application.Exceptions;
+using Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryOrderService.Middlewares
@@ -22,23 +23,30 @@ namespace DeliveryOrderService.Middlewares
             }
             catch (DomainException ex)
             {
-                _logger.LogError(ex, ex.Message);
-
-                var problem = new ObjectResult(new { Error = ex.Message })
-                {
-                    StatusCode = StatusCodes.Status400BadRequest
-                };
-
-                context.Response.StatusCode = StatusCodes.Status400BadRequest;
-
-                await context.Response.WriteAsJsonAsync(problem);
-
+                context = await DoAcceptableErrorLogic(context, ex);
+            }
+            catch (ApplicationLayerException ex) {
+                context = await DoAcceptableErrorLogic(context, ex);
             }
             catch (Exception ex)
             {
-                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }
         }
 
+        private async Task<HttpContext> DoAcceptableErrorLogic(HttpContext context, Exception exception) {
+            _logger.LogError(exception, exception.Message);
+
+            var problem = new ObjectResult(new { Error = exception.Message })
+            {
+                StatusCode = StatusCodes.Status400BadRequest
+            };
+
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+            await context.Response.WriteAsJsonAsync(problem);
+
+            return context;
+        }
     }
 }
