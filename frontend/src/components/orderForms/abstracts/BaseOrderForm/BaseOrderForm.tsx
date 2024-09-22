@@ -12,6 +12,7 @@ export interface BaseOrderFormProps extends Partial<Order> {
 }
 
 const BaseOrderForm: FC<BaseOrderFormProps> = ({
+  id,
   sender = { city: "", address: "" },
   recipient = { city: "", address: "" },
   cargoWeight = 1,
@@ -23,6 +24,15 @@ const BaseOrderForm: FC<BaseOrderFormProps> = ({
 }) => {
   return (
     <div>
+      <FormInputField
+        label=""
+        type="text"
+        defaultValue={`${id}`}
+        isReadOnly={true}
+        register={register ? register("id") : undefined}
+        isHide={true}
+      />
+    
       {orderNumber && (
         <FormInputField
           label="Order number"

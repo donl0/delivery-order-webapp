@@ -9,6 +9,7 @@ interface FormInputFieldProps {
   isReadOnly?: boolean;
   register?: UseFormRegisterReturn;
   errorMessage?: string;
+  isHide?: boolean;
 }
 
 const FormInputField: FC<FormInputFieldProps> = ({
@@ -18,6 +19,7 @@ const FormInputField: FC<FormInputFieldProps> = ({
   isReadOnly = false,
   register,
   errorMessage,
+  isHide = false
 }) => {
   return (
     <div>
@@ -28,6 +30,7 @@ const FormInputField: FC<FormInputFieldProps> = ({
         readOnly={isReadOnly}
         className={isReadOnly ? styles.readOnly : ""}
         {...(register || {})}
+        hidden = {isHide}
       />
       {errorMessage && <span className={styles.error}>{errorMessage}</span>}
     </div>
