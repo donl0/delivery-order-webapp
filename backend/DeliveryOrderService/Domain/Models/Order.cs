@@ -23,6 +23,19 @@ namespace Domain.Models
             Validate();
         }
 
+        public void Update(Order updateWith) {
+            if (updateWith == null)
+                throw new ArgumentNullException(nameof(updateWith));
+
+            Sender.Update(updateWith.Sender);
+            Recipient.Update(updateWith.Recipient);
+
+            CargoWeight = updateWith.CargoWeight;
+            CargoPickupDate = updateWith.CargoPickupDate;
+
+            Validate();
+        }
+
         private void Validate()
         {
             if (Sender == null)

@@ -1,4 +1,5 @@
 ﻿using Domain.Exceptions;
+using System.Reflection;
 
 namespace Domain.Models
 {
@@ -12,6 +13,16 @@ namespace Domain.Models
         {
             City = city;
             Address = address;
+
+            Validate();
+        }
+
+        public void Update(PersonOrderEntity updateWith) {
+            if (updateWith == null)
+                throw new FieldIsNullOrEmptyException(nameof(updateWith));
+
+            City = updateWith.City;
+            Address = updateWith.Address;
 
             Validate();
         }
