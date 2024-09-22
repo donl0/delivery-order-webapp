@@ -1,5 +1,4 @@
 import { deleteOrder } from "../../api/ordersApi";
-import { OrderId } from "../../types/Order";
 import BaseOrderButton from "../UI/orderActoinButton/BaseOrderButton";
 import { FC } from "react";
 

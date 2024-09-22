@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { Order } from "../types/Order";
-import { Urls } from "../types/Urls";
 
 export const useNavigateToUrl = () => {
   const navigate = useNavigate();
