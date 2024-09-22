@@ -11,7 +11,7 @@ const DeleteOrderButton: FC<DeleteOrderButtonProps> = ({ id, onSuccess }) => {
   const handleClick = () => {
     const update = async (orderId: number) => {
       await deleteOrder(orderId);
-      onSuccess();
+      await onSuccess();
     }
 
     update(id);
