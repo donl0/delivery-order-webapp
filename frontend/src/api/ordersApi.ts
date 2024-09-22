@@ -1,5 +1,23 @@
 import { Order } from '../types/Order';
 
+export const deleteOrder = async (id: number): Promise<number> => {
+    const url = `https://localhost:7292/api/Orders?id=${id}`;
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'accept': 'text/plain',
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Error deleting order');
+    }
+
+    const deletedOrderId: number = await response.json();
+    return deletedOrderId;
+};
+
 export const createOrder = async (order: Order): Promise<number> => {
     const url = 'https://localhost:7292/api/Orders';
 
