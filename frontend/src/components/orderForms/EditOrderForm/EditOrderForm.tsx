@@ -4,14 +4,18 @@ import withCurrentOrder from "../abstracts/withCurrentOrder";
 import withFormValidation from "../abstracts/withFormValidation";
 import { Order } from "../../../types/Order";
 import { updateOrder } from "../../../api/ordersApi";
+import { useTryNavigateIfSuccess  } from "../../../utils/orderUtils";
+import { Urls } from "../../../types/Urls";
 
 const EditOrderForm: FC = () => {
+    const tryNavigateIfSuccess = useTryNavigateIfSuccess();
+
     const onSubmit = (data: Order) => {
         const update = async () => {
             await updateOrder(data);
         }
 
-        update();
+        tryNavigateIfSuccess(update, Urls.HomePage);
     };
 
     const OrderFormWithCurrentOrder = withCurrentOrder(BaseOrderForm);
